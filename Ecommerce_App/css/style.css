@@ -1,0 +1,59 @@
+﻿body {
+    
+}
+
+.card-shadow {
+    box-shadow:0 0 8px 0 rgba(0,0,0,0.1)
+}
+
+
+.card-hover:hover {
+    background-color: #f0f0f0;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.1);
+    transform: scale(1.01);
+    transition: transform 0.2s ease, box-shadow 0.9s ease, background-color 0.2s ease;
+}
+.star {
+    color: #0094ff;
+    font-size:13px
+}
+#ecomNav-icon ::before {
+    
+    border-radius: .5rem;
+    background: #ffffff;
+    font-size: 2rem;
+    margin-left: .3rem;
+    cursor: pointer;
+    position: relative;
+    text-align: center;
+    padding:5px;
+}
+
+.cart-container {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.cart-icon {
+    font-size: 24px;
+    color: white;
+    position: relative;
+}
+
+.cart-count {
+   
+    margin-top: 0px;
+    margin-left: 15px;
+    background-color: white;
+    color: #8e173d;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    font-weight: bold;
+} 
