@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-
+@model DAL.Master.CategoryViewModels
 <div class="container">
     <div class="row mt-4">
 
@@ -67,70 +67,33 @@
     <div class="container mt-3">
         <div class="row">
             <p class="" style="font-weight:600;font-size:28px;color:#0094ff">Categories</p>
-            <div class="col ">
-                <div class="card card-hover">
-                    <div class="card-bod text-center p-2">
-                        <img src="~/images/img1.jpg" style="width:80%;height:100px" />
-                        <p>Samsung</p>
+
+
+            @{
+                System.Data.DataTable dt = (System.Data.DataTable)ViewBag._listCategory;
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+
+                    <div class="col">
+                        <a href="~/Product/PoductDetails?categoryId=@dt.Rows[i]["CategoryId"]&&CategoryName=@dt.Rows[i]["CategoryName"]" style="text-decoration:none;color:black">
+
+                            <div class="card card-hover">
+                                <div class="card-bod text-center p-2">
+                                    <img src="~/images/img1.jpg" style="width:80%;height:100px" />
+                                    <p>@dt.Rows[i]["CategoryName"]</p>
+                                </div>
+                            </div>
+                        </a>
+
                     </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card card-hover">
-                    <div class="card-bod text-center p-2">
-                        <img src="~/images/img1.jpg" style="width:80%;height:100px" />
-                        <p>Samsung</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card card-hover">
-                    <div class="card-bod text-center p-2">
-                        <img src="~/images/img2.jpg" style="width:80%;height:100px" />
-                        <p>Samsung</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card card-hover">
-                    <div class="card-bod text-center p-2">
-                        <img src="~/images/img1.jpg" style="width:80%;height:100px" />
-                        <p>Samsung</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card card-hover">
-                    <div class="card-bod text-center p-2">
-                        <img src="~/images/img2.jpg" style="width:80%;height:100px" />
-                        <p>Samsung</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card card-hover">
-                    <div class="card-bod text-center p-2">
-                        <img src="~/images/img1.jpg" style="width:80%;height:100px" />
-                        <p>Samsung</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card card-hover">
-                    <div class="card-bod text-center p-2">
-                        <img src="~/images/img2.jpg" style="width:80%;height:100px" />
-                        <p>Samsung</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card card-hover">
-                    <div class="card-bod text-center p-2">
-                        <img src="~/images/img1.jpg" style="width:80%;height:100px" />
-                        <p>Samsung</p>
-                    </div>
-                </div>
-            </div>
+
+
+                };
+
+
+            }
+
         </div>
     </div>
     <!--End Category-->
@@ -138,362 +101,47 @@
     <div class="container mt-3">
         <div class="row mb-4">
             <p class="" style="font-weight:600;font-size:28px;color:#0094ff">Just For You</p>
-            <div class="col-md-2">
-                <div class="card">
-                    <div class="card-bod text-center p-2">
-                        <img src="~/images/img2.jpg" style="width:70%;height:100px" />
-                        <p class="p-0">
-                            Samsung <br />
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            (0)
-                            <br />
-                            <span style="color:#808080;font-size:13px">Brand not available</span>
-                        </p>
 
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p class="fw-bold">
-                                    Rs 500<br />
-                                    <span class="text-decoration-line-through text-muted">Rs 500</span>
+            @{
+
+
+                foreach (System.Data.DataRow row in ((System.Data.DataTable)ViewBag._ListProduct).Rows)
+                {
+                    <div class="col-md-2">
+                        <div class="card">
+                            <div class="card-bod text-center p-2">
+                                <img src="~/images/img2.jpg" style="width:70%;height:100px" />
+                                <p class="p-0">
+                                    @row["ProductName"] <br />
+                                    <i class="fa-regular fa-star star"></i>
+                                    <i class="fa-regular fa-star star"></i>
+                                    <i class="fa-regular fa-star star"></i>
+                                    <i class="fa-regular fa-star star"></i>
+                                    <i class="fa-regular fa-star star"></i>
+                                    (0)
+                                    <br />
+                                    <span style="color:#808080;font-size:13px">Brand not available</span>
                                 </p>
-                            </div>
-                            <div class="col-md-6">
-                                <button class="btn " style="border:2px solid #0094ff">ADD</button>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p class="fw-bold">
+                                            @row["Price"]<br />
+                                            <span class="text-decoration-line-through text-muted">Rs 500</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button class="btn " style="border:2px solid #0094ff">ADD</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="card">
-                    <div class="card-bod text-center p-2">
-                        <img src="~/images/img2.jpg" style="width:70%;height:100px" />
-                        <p class="p-0">
-                            Samsung <br />
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            (0)
-                            <br />
-                            <span style="color:#808080;font-size:13px">Brand not available</span>
-                        </p>
+                }
+            }
 
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p class="fw-bold">
-                                    Rs 500<br />
-                                    <span class="text-decoration-line-through text-muted">Rs 500</span>
-                                </p>
-                            </div>
-                            <div class="col-md-6">
-                                <button class="btn " style="border:2px solid #0094ff">ADD</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="card">
-                    <div class="card-bod text-center p-2">
-                        <img src="~/images/img2.jpg" style="width:70%;height:100px" />
-                        <p class="p-0">
-                            Samsung <br />
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            (0)
-                            <br />
-                            <span style="color:#808080;font-size:13px">Brand not available</span>
-                        </p>
 
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p class="fw-bold">
-                                    Rs 500<br />
-                                    <span class="text-decoration-line-through text-muted">Rs 500</span>
-                                </p>
-                            </div>
-                            <div class="col-md-6">
-                                <button class="btn " style="border:2px solid #0094ff">ADD</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="card">
-                    <div class="card-bod text-center p-2">
-                        <img src="~/images/img2.jpg" style="width:70%;height:100px" />
-                        <p class="p-0">
-                            Samsung <br />
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            (0)
-                            <br />
-                            <span style="color:#808080;font-size:13px">Brand not available</span>
-                        </p>
 
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p class="fw-bold">
-                                    Rs 500<br />
-                                    <span class="text-decoration-line-through text-muted">Rs 500</span>
-                                </p>
-                            </div>
-                            <div class="col-md-6">
-                                <button class="btn " style="border:2px solid #0094ff">ADD</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="card">
-                    <div class="card-bod text-center p-2">
-                        <img src="~/images/img2.jpg" style="width:70%;height:100px" />
-                        <p class="p-0">
-                            Samsung <br />
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            (0)
-                            <br />
-                            <span style="color:#808080;font-size:13px">Brand not available</span>
-                        </p>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p class="fw-bold">
-                                    Rs 500<br />
-                                    <span class="text-decoration-line-through text-muted">Rs 500</span>
-                                </p>
-                            </div>
-                            <div class="col-md-6">
-                                <button class="btn " style="border:2px solid #0094ff">ADD</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2 mb-4">
-                <div class="card">
-                    <div class="card-bod text-center p-2">
-                        <img src="~/images/img2.jpg" style="width:70%;height:100px" />
-                        <p class="p-0">
-                            Samsung <br />
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            (0)
-                            <br />
-                            <span style="color:#808080;font-size:13px">Brand not available</span>
-                        </p>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p class="fw-bold">
-                                    Rs 500<br />
-                                    <span class="text-decoration-line-through text-muted">Rs 500</span>
-                                </p>
-                            </div>
-                            <div class="col-md-6">
-                                <button class="btn " style="border:2px solid #0094ff">ADD</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="card">
-                    <div class="card-bod text-center p-2">
-                        <img src="~/images/img2.jpg" style="width:70%;height:100px" />
-                        <p class="p-0">
-                            Samsung <br />
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            (0)
-                            <br />
-                            <span style="color:#808080;font-size:13px">Brand not available</span>
-                        </p>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p class="fw-bold">
-                                    Rs 500<br />
-                                    <span class="text-decoration-line-through text-muted">Rs 500</span>
-                                </p>
-                            </div>
-                            <div class="col-md-6">
-                                <button class="btn " style="border:2px solid #0094ff">ADD</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="card">
-                    <div class="card-bod text-center p-2">
-                        <img src="~/images/img2.jpg" style="width:70%;height:100px" />
-                        <p class="p-0">
-                            Samsung <br />
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            (0)
-                            <br />
-                            <span style="color:#808080;font-size:13px">Brand not available</span>
-                        </p>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p class="fw-bold">
-                                    Rs 500<br />
-                                    <span class="text-decoration-line-through text-muted">Rs 500</span>
-                                </p>
-                            </div>
-                            <div class="col-md-6">
-                                <button class="btn " style="border:2px solid #0094ff">ADD</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div><div class="col-md-2">
-                <div class="card">
-                    <div class="card-bod text-center p-2">
-                        <img src="~/images/img2.jpg" style="width:70%;height:100px" />
-                        <p class="p-0">
-                            Samsung <br />
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            (0)
-                            <br />
-                            <span style="color:#808080;font-size:13px">Brand not available</span>
-                        </p>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p class="fw-bold">
-                                    Rs 500<br />
-                                    <span class="text-decoration-line-through text-muted">Rs 500</span>
-                                </p>
-                            </div>
-                            <div class="col-md-6">
-                                <button class="btn " style="border:2px solid #0094ff">ADD</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div><div class="col-md-2">
-                <div class="card">
-                    <div class="card-bod text-center p-2">
-                        <img src="~/images/img2.jpg" style="width:70%;height:100px" />
-                        <p class="p-0">
-                            Samsung <br />
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            (0)
-                            <br />
-                            <span style="color:#808080;font-size:13px">Brand not available</span>
-                        </p>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p class="fw-bold">
-                                    Rs 500<br />
-                                    <span class="text-decoration-line-through text-muted">Rs 500</span>
-                                </p>
-                            </div>
-                            <div class="col-md-6">
-                                <button class="btn " style="border:2px solid #0094ff">ADD</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div><div class="col-md-2">
-                <div class="card">
-                    <div class="card-bod text-center p-2">
-                        <img src="~/images/img2.jpg" style="width:70%;height:100px" />
-                        <p class="p-0">
-                            Samsung <br />
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            (0)
-                            <br />
-                            <span style="color:#808080;font-size:13px">Brand not available</span>
-                        </p>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p class="fw-bold">
-                                    Rs 500<br />
-                                    <span class="text-decoration-line-through text-muted">Rs 500</span>
-                                </p>
-                            </div>
-                            <div class="col-md-6">
-                                <button class="btn " style="border:2px solid #0094ff">ADD</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div><div class="col-md-2">
-                <div class="card">
-                    <div class="card-bod text-center p-2">
-                        <img src="~/images/img2.jpg" style="width:70%;height:100px" />
-                        <p class="p-0">
-                            Samsung <br />
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            <i class="fa-regular fa-star star"></i>
-                            (0)
-                            <br />
-                            <span style="color:#808080;font-size:13px">Brand not available</span>
-                        </p>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p class="fw-bold">
-                                    Rs 500<br />
-                                    <span class="text-decoration-line-through text-muted">Rs 500</span>
-                                </p>
-                            </div>
-                            <div class="col-md-6">
-                                <button class="btn " style="border:2px solid #0094ff">ADD</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
     <!--Start Shipping facility-->
@@ -509,6 +157,7 @@
                             <p class="fw-bold">
                                 Low Shipping Cost<br />
                                 <span style="color:#808080;font-size:13px">Get your order in lowest shipping cost</span>
+                                <span class="text-light">sddddddd</span>
                             </p>
                         </div>
                     </div>
@@ -546,5 +195,6 @@
             </div>
         </div>
     </div>
+
     <!--End  Shipping facility-->
 </div>

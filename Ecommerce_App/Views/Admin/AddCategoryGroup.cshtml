@@ -1,0 +1,112 @@
+﻿
+ @model DAL.Master.CategoryViewModels
+<div class="container-fluid col-lg-pull-5 mt-5">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card-shadow">
+                <div class="card-body">
+                    <p class="fs-3">Add category</p>
+                    <form action="~/Admin/saveCategoryGroup" method="post" enctype="multipart/form-data">
+                        <label class="form-label">Category Name</label>
+                        <input type="hidden" class="form-control" required id="CategoryId" name="CategoryId" />
+                        <input type="hidden" class="form-control" required id="button-text" name="button-text" />
+                        <input type="text" class="form-control" required id="CategoryName" name="CategoryName" placeholder="Category Name" value="" />
+                        <label class="form-label">Category Image</label>
+                        <input type="file" class="form-control" id="CategoryImage" name="CategoryImage" />
+
+                        <button class="btn btn-primary col-md-12 mt-3">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="card-shadow">
+                <div class="card-body">
+                    <p class="text-center fs-4">Category Group</p>
+                    <table class="table table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>SNO.</th>
+                                <th>Category Name</th>
+                                <th>Category Image</th>
+                                <th>Status</th>
+                                <th style="width:100px">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                System.Data.DataTable dt = (System.Data.DataTable)ViewBag._CategoryList;
+
+                                for (int i = 0; i < dt.Rows.Count; i++)
+                                {
+                                    <tr>
+                                        <td>@(i + 1)</td>
+                                        <td>@dt.Rows[i]["CategoryName"]</td>
+                                        <td>@dt.Rows[i]["CategoryImage"]</td>
+                                        <td>@dt.Rows[i]["Status"]</td>
+                                        <td>
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-success btn-sm edit-btn" data-category-id="@dt.Rows[i]["CategoryId"]"><i class="fa-solid fa-pen-to-square"></i>Edit</button>
+                                                <button class="btn btn-danger btn-sm edit-btn" data-category-id="@dt.Rows[i]["CategoryId"]"><i class="fa-solid fa-trash"></i>Delete</button>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                } }
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        // Event delegation to handle click on dynamically generated edit buttons
+        $(document).on("click", ".edit-btn", function () {
+            var buttonText = $(this).text().trim(); // Get the text inside the button ("Edit" or "Delete")
+
+            alert("Button clicked: " + buttonText);
+            // Get the CategoryId stored in the data attribute
+            var categoryId = $(this).data("category-id");
+            $.ajax({
+                url: '/Admin/FetchCategoryById2?id=' + categoryId,
+                datatype: 'json',
+                contentType: "application/json",
+                traditional: true,
+                method: 'get',
+                success: function (data) {
+                    if (data != "") {
+                        $("#CategoryName").val(data.CategoryName);
+                       // $("#CategoryImage").val(data.CategoryImage);
+                        // Show the current file or image (if it's an image)
+                        if (data.CategoryImage) {
+                            // Assuming CategoryImage contains a URL to an image
+                            $("#CategoryImage").attr("src", data.CategoryImage).show();
+                        }
+                        $("#CategoryId").val(categoryId);
+                        $("#button-text").val(buttonText);
+                    }
+                }
+
+            })
+        });
+
+        $("#CategoryImage").on("change", function () {
+            // Get the file(s) selected
+            var fileInput = document.getElementById("CategoryImage");
+            var file = fileInput.files[0];  // Get the first file (if multiple files are selected, you can loop through them)
+
+            if (file) {
+                console.log("File Name: " + file.name);
+                console.log("File Size: " + file.size + " bytes");
+                console.log("File Type: " + file.type);
+            } else {
+                console.log("No file selected.");
+            }
+        });
+    </script>
+</div>
+

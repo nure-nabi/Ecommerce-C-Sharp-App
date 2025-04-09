@@ -1,5 +1,6 @@
 ﻿
 @{
+    @model DAL.Account.Account
     ViewBag.Title = "Register";
 }
 
@@ -12,49 +13,50 @@
             <div class="card card-shadow">
                 <div class="card-body">
                     <p class="fs-3 text-center">Register</p>
-                    <form action="" method="post">
+                    <p class="text-center">@ViewBag.Message</p>
+                    <form action="~/Account/RegisterUser" method="post">
                         <div class="row">
                             <div class="col">
                                 <label class="form-label">User Name</label>
-                                <input type="text" class="form-control" required name="name" />
+                                <input type="text" class="form-control" required name="UserName" />
                             </div>
                             <div class="col">
                                 <label class="form-label">Mobile No</label>
-                                <input type="number" class="form-control" required name="mobile" />
+                                <input type="number" class="form-control" required name="MobileNo" />
                             </div>
                         </div>
                         <div class="mt-3">
                             <label class="form-label">Email</label>
-                            <input type="email" class="form-control" required name="email" />
+                            <input type="email" class="form-control" required name="Email" />
                         </div>
                         <div class="row">
                             <div class="col">
                                 <label class="form-label">Address</label>
-                                <input type="text" class="form-control" required name="address" />
+                                <input type="text" class="form-control" required name="Address" />
                             </div>
                             <div class="col">
                                 <label class="form-label">City</label>
-                                <input type="text" class="form-control" required name="city" />
+                                <input type="text" class="form-control" required name="City" />
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
                                 <label class="form-label">State</label>
-                                <input type="text" class="form-control" required name="state" />
+                                <input type="text" class="form-control" required name="State" />
                             </div>
                             <div class="col">
                                 <label class="form-label">Pincode</label>
-                                <input type="text" class="form-control" required name="pincode" />
+                                <input type="text" class="form-control" required name="Pincode" />
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
                                 <label class="form-label">Password</label>
-                                <input type="password" class="form-control" required name="password" />
+                                <input type="password" class="form-control" required name="Password" />
                             </div>
                             <div class="col">
                                 <label class="form-label">Confirm Password</label>
-                                <input type="text" class="form-control" required name="cnf-password" />
+                                <input type="text" class="form-control" required name="Cnf-Password" />
                             </div>
                         </div>
 

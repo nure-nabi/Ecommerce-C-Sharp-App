@@ -36,19 +36,21 @@
 
             </div>
             <div class="col-md-8  align-content-center mt-2">
-                <ul class="list-inline nav-items text-center">
+                <ul class="list-inline nav-items text-center ">
                     <li class="list-inline-item"><a href="~/Home/Index" class="text-decoration-none">HOME</a></li>
                     <li class="list-inline-item"><a href="~/Home/Index" class="text-decoration-none">NEW ARRIVAL</a></li>
                     <li class="list-inline-item"><a href="~/Product/Index" class="text-decoration-none">EXPLORE</a></li>
                     <li class="list-inline-item"><a href="~/Product/Index" class="text-decoration-none">WHAT'S NEW?</a></li>
-                    <li class="list-inline-item"><a href="~/Account/login" class="text-decoration-none">LOGIN</a></li>
+                    <li class="list-inline-item"><a href="~/Account/login" class="text-decoration-none">@(ViewBag._LoginSesion != null ? @ViewBag._LoginSesion + " LOGOUT" : "LOGIN") </a></li>
                     <li class="list-inline-item"><a href="~/Account/Register" class="text-decoration-none">SING UP</a></li>
                 </ul>
 
             </div>
-            <div class="col-md-2 text-start mt-2 fs-10 fs-4 text-light" id="ecomNav-iconss">
-                <span class="cart-count" style="margin-right:20px">10</span>
-                <i class="fa-solid fa-cart-shopping "></i>
+            <div class="col-md-2 text-start mt-0 fs-2 " id="ecomNav-iconss">
+                <div class="cart-container ">
+                    <i class="fa-solid fa-cart-shopping "></i>
+                    <span class="cart-badge">3</span>
+                </div>
 
             </div>
         </div>
@@ -74,8 +76,8 @@
        
         @RenderBody()
       
-        <div class="container-fluid bg-dark">
-            <div class="container " style="padding:40px 0px">
+        <div class="container-fluid bg-dark mt-3 footer"  style="padding: 10px 0px; padding-bottom: 10px 0px">
+            <div class="container ">
                 <div class="row">
                     <div class="col-md-3">
                         <p class="text-primary">Contact Us</p>

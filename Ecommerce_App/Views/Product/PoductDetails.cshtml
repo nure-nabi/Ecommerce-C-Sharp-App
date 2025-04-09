@@ -3,5 +3,26 @@
     ViewBag.Title = "PoductDetails";
 }
 
-<h2>PoductDetails</h2>
+<div class="container">
+    <div class="row p-2">
+        <p class="" style="font-weight:600;font-size:28px;color:#0094ff">@ViewBag._CategoryName</p>
+        @{
+            foreach (System.Data.DataRow row in ((System.Data.DataTable)ViewBag._listCategoryList).Rows)
+            {
+                <div class="col-md-2">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <img src="~/images/img2.jpg" style="width:70%;height:100px" />
+                                <p>@row["SubCategoryName"]</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+
+    </div>
+</div>
 

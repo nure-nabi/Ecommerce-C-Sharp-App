@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+
+
+@*,[ProductName]
+    ,[ProductNameNepali]
+    ,[Brand]
+    ,[CategoryId]
+    ,[SubCategoryId]
+    ,[SubCategoryId2]
+    ,[SellerId]
+    ,[Description]
+    ,[Highlights]
+    ,[what_is_in_box]
+    ,[Price]*@
+
+<div class="container">
+    <div class="row">
+        <form action="~/AddProduct/SaveProduct" method="post">
+            <div class="container mt-1">
+                <label for="" class="form-label">Product Name</label>
+                <input class="form-control" name="product_name" placeholder="Product Name" />
+            </div>
+            <div class="container mt-1">
+                <label for="" class="form-label">Product Name Nepali</label>
+                <input class="form-control" name="product_name_nepali" placeholder="Product Name Nepali" />
+            </div>
+            <div class="container mt-1">
+                <label for="" class="form-label">Brand</label>
+                <input class="form-control" name="Brand" placeholder="Brand" />
+            </div>
+            <div class="container mt-1">
+                <label for="exampleSelect" class="form-label">Choose an Category:</label>
+                <select class="form-select" name="categoryId" id="exampleSelect" required>
+                    <option>---Select---</option>
+                    @{
+                        foreach (System.Data.DataRow row in ((System.Data.DataTable)ViewBag._CategoryList).Rows)
+                        {
+                            <option value="@row["CategoryId"]">@row["CategoryName"]</option>
+                        }
+
+                    }
+
+                </select>
+            </div>
+            <div class="container mt-1">
+                <label for="exampleSelect" class="form-label">Choose an Sub Category:</label>
+                <select class="form-select" name="sub-categoryId" required>
+                    <option>---Select---</option>
+                    @{
+                        System.Data.DataTable dts = (System.Data.DataTable)ViewBag._SubCategoryList;
+
+                        for (int i = 0; i < dts.Rows.Count; i++)
+                        {
+                            <option value="@dts.Rows[i]["SubCategoryId"]">@dts.Rows[i]["SubCategoryName"]</option>
+                        }
+
+                    }
+
+                </select>
+            </div>
+
+            <div class="container mt-1">
+                <label for="" class="form-label">Price</label>
+                <input type="number" class="form-control" name="price" placeholder="Price" />
+            </div>
+            <div class="container mt-1">
+                <label for="" class="form-label">Qty</label>
+                <input type="number"class="form-control" name="Qty" placeholder="Qty" />
+            </div>
+
+            <div class="mt-1">
+                <a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Variation</a>
+            </div>
+
+            <div class="mt-1 offset-md-3">
+                <button type="submit" class="btn btn-primary btn-sm">Save</button>
+            </div>
+        </form>
+    </div>
+
+        <!-- Partial View Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add Color</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        @Html.Partial("~/Views/AddProduct/_PartialViewAddVariation.cshtml")
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
